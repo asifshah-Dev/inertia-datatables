@@ -5,6 +5,7 @@ export { DataTableColumnHeader } from './data-table-column-header';
 export { DataTableColumnVisibility } from './data-table-column-visibility';
 export { DataTableEmpty } from './data-table-empty';
 export { useDataTable } from './use-data-table';
+export { formatCellValue, defaultCellFormatter } from './cell-formatters';
 export type {
   DataTableColumn,
   DataTableMeta,

@@ -18,6 +18,7 @@ import type {
     DataTableOptions,
     DataTableColumn,
 } from './types';
+import { defaultCellFormatter } from './cell-formatters';
 
 type ColumnSearchesState = Record<string, string>;
 
@@ -59,13 +60,13 @@ export function useDataTable<TData extends Record<string, unknown>>({
     const columnHelper = useMemo(() => createColumnHelper<TData>(), []);
 
     const columns = useMemo<ColumnDef<TData, unknown>[]>(() => {
-        return initialData.columns.map((col: DataTableColumn) => {
+        return initialData.columns.map((col: DataTableColumn<TData>) => {
             const column = columnHelper.accessor(
                 (row: TData) => row[col.name as keyof TData] as unknown,
                 {
                     header: col.label,
                     id: col.name,
-                    cell: (info) => info.getValue(),
+                    cell: col.cell ?? defaultCellFormatter,
                 }
             );
 

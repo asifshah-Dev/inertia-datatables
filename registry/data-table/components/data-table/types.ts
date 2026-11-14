@@ -1,6 +1,7 @@
 import type { ColumnDef, SortingState, PaginationState, ColumnFiltersState } from '@tanstack/react-table';
+import type { CellContext } from '@tanstack/react-table';
 
-export interface DataTableColumn {
+export interface DataTableColumn<TData = unknown> {
     name: string;
     label: string;
     sortable: boolean;
@@ -9,6 +10,8 @@ export interface DataTableColumn {
     hidden: boolean;
     filter_type?: 'text' | 'select' | 'boolean' | null;
     filter_options?: Array<{ value: string; label: string }>;
+    /** Custom cell formatter. Receives the cell context and returns a React node. */
+    cell?: (info: CellContext<TData, unknown>) => React.ReactNode;
 }
 
 export interface DataTableMeta {
@@ -38,7 +41,7 @@ export interface DataTableResponse<TData = unknown> {
     data: TData[];
     meta: DataTableMeta;
     query: DataTableQuery;
-    columns: DataTableColumn[];
+    columns: DataTableColumn<TData>[];
     config: DataTableConfig;
 }
 
