@@ -22,7 +22,7 @@ import { defaultCellFormatter } from './cell-formatters';
 
 type ColumnSearchesState = Record<string, string>;
 
-export function useDataTable<TData extends Record<string, unknown>>({
+export function useDataTable<TData extends object>({
     data: initialData,
     dataPropName = 'data',
 }: DataTableOptions<TData>) {
