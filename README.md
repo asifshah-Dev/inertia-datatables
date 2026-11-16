@@ -859,8 +859,8 @@ public function index()
 
 | Laravel | PHP | Testbench | Status |
 |---------|-----|-----------|--------|
-| 12.x | 8.4+ | 10.x | ✅ Supported |
-| 13.x | 8.4+ | 11.x | ✅ Supported |
+| 12.x | 8.3+ | 10.x | ✅ Supported |
+| 13.x | 8.3+ | 11.x | ✅ Supported |
 
 ### Databases
 
