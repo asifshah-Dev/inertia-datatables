@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { type ReactTable, type Column, type RowData } from '@tanstack/react-table';
 import type { DataTableFeatures } from './table-features';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -18,6 +17,11 @@ interface DataTableColumnVisibilityProps<TData extends RowData> {
 export function DataTableColumnVisibility<TData extends RowData>({
     table,
 }: DataTableColumnVisibilityProps<TData>) {
+    // React Compiler (enabled by default in both official Laravel React starter kits)
+    // memoizes this component against TanStack's stable `column` object, but
+    // `column.getIsVisible()` changes during render. Opt out so the visibility
+    // checkbox re-renders when column visibility changes.
+    "use no memo";
     const columns = table
         .getAllLeafColumns()
         .filter((column: Column<DataTableFeatures, TData, unknown>) => column.columnDef.meta?.client_only !== true);
@@ -38,7 +42,7 @@ export function DataTableColumnVisibility<TData extends RowData>({
                         <DropdownMenuItem
                             key={column.id}
                             className="flex items-center gap-2 px-2 py-1.5 text-sm"
-                            onSelect={(e: React.MouseEvent<HTMLDivElement>) => e.preventDefault()}
+                            onSelect={(e: Event) => e.preventDefault()}
                         >
                             <Checkbox
                                 checked={column.getIsVisible()}
