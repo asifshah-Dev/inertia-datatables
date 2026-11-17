@@ -21,6 +21,7 @@ use TooInfinity\InertiaDataTables\DataTableResult;
 use TooInfinity\InertiaDataTables\Exceptions\InvalidColumnException;
 use TooInfinity\InertiaDataTables\Exceptions\InvalidFilterException;
 use TooInfinity\InertiaDataTables\Exceptions\InvalidSortException;
+use TooInfinity\InertiaDataTables\QueryConfig;
 use TooInfinity\InertiaDataTables\Sorting\Sort;
 use TooInfinity\InertiaDataTables\Sorting\SortCollection;
 
@@ -80,6 +81,7 @@ final readonly class QueryProcessor
         $config = [
             'debounce' => $debounce,
             'per_page_options' => $perPageOptions,
+            'query_keys' => QueryConfig::fromConfig()->toQueryKeys(),
         ];
 
         /** @var \Illuminate\Contracts\Pagination\LengthAwarePaginator<array-key, TModel> $paginator */
